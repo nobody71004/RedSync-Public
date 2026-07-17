@@ -1,0 +1,13 @@
+# Keep this repo documentation-only
+/src/
+/server/
+/client/
+/release/
+*.dll
+*.exe
+*.so
+*.pdb
+*.zip
+*.cfg
+*.json
+!package.json

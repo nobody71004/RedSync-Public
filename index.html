@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RedSync — Night City Multiplayer</title>
+  <meta name="description" content="Public showcase face for RedSync. Source remains private." />
+  <meta name="robots" content="index,follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg0: #05070a;
+      --bg1: #0b1218;
+      --line: #1e3a3a;
+      --cyan: #00e5ff;
+      --green: #00ff9c;
+      --red: #ff003c;
+      --orange: #ff6b00;
+      --violet: #7b61ff;
+      --text: #d7ecec;
+      --muted: #7f9a9a;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg0); color: var(--text); }
+    body {
+      min-height: 100vh;
+      font-family: "Share Tech Mono", ui-monospace, monospace;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(0, 229, 255, 0.12), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(255, 0, 60, 0.10), transparent 50%),
+        linear-gradient(180deg, #071018 0%, #05070a 40%, #04060a 100%);
+    }
+    .scan {
+      pointer-events: none;
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0, transparent 2px,
+        rgba(0,0,0,0.08) 3px
+      );
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 920px; margin: 0 auto; padding: 48px 20px 80px; }
+    .brand {
+      font-family: Orbitron, sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 8vw, 4.5rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin: 0 0 12px;
+      text-shadow: 0 0 24px rgba(0, 229, 255, 0.35);
+      color: #e8ffff;
+    }
+    .tag {
+      color: var(--cyan);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      margin-bottom: 28px;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .badge {
+      border: 1px solid var(--line);
+      background: rgba(10, 20, 24, 0.85);
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+    .badge strong { color: var(--green); }
+    .badge.warn strong { color: var(--orange); }
+    .badge.off strong { color: var(--muted); }
+    .badge.priv strong { color: var(--violet); }
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(12, 22, 28, 0.92), rgba(8, 14, 18, 0.92));
+      padding: 22px 20px;
+      margin: 18px 0;
+      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.04) inset;
+    }
+    h2 {
+      font-family: Orbitron, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+      margin: 0 0 14px;
+    }
+    p { color: var(--muted); line-height: 1.55; margin: 0 0 12px; }
+    p.lead { color: var(--text); font-size: 1.05rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; table-layout: fixed; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(30, 58, 58, 0.7); vertical-align: top; overflow-wrap: break-word; }
+    th:nth-child(1), td:nth-child(1) { width: 34%; }
+    th:nth-child(2), td:nth-child(2) { width: 28%; }
+    th:nth-child(3), td:nth-child(3) { width: 38%; }
+    th { color: var(--muted); font-weight: 500; letter-spacing: 0.08em; font-size: 0.72rem; }
+    .bar { color: var(--green); letter-spacing: -0.05em; white-space: nowrap; overflow: hidden; }
+    .bar.off { color: var(--muted); }
+    .bar.partial { color: var(--orange); }
+    .bar.improved { color: #ffb040; }
+    .ok { color: var(--green); }
+    .partial { color: var(--orange); }
+    .improved { color: #ffb040; }
+    .off { color: var(--muted); }
+    .status-stack { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .status-stack .label { white-space: nowrap; }
+    .row-note { display: block; color: var(--muted); font-size: 0.78rem; font-weight: 400; letter-spacing: 0; white-space: normal; line-height: 1.35; }
+    .note {
+      border-left: 3px solid var(--violet);
+      padding: 10px 14px;
+      background: rgba(123, 97, 255, 0.08);
+      color: var(--text);
+      margin: 18px 0;
+    }
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+    a { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="scan" aria-hidden="true"></div>
+  <main class="wrap">
+    <p class="tag">Night City Multiplayer · Public Showcase</p>
+    <h1 class="brand">REDSYNC</h1>
+    <p class="lead">Multiplayer framework for Cyberpunk 2077 — chat live, events online, source private.</p>
+
+    <div class="badges">
+      <div class="badge"><strong>STATUS</strong> ONLINE</div>
+      <div class="badge"><strong>CHAT</strong> LIVE</div>
+      <div class="badge warn"><strong>EVENTS</strong> SMASHER + CERBERUS</div>
+      <div class="badge priv"><strong>SOURCE</strong> PRIVATE</div>
+      <div class="badge off"><strong>LICENSE</strong> MIT</div>
+    </div>
+
+    <div class="note">
+      This page is a <b>public face only</b>. No source, binaries, configs, IPs, or credentials are published here.
+      Implementation lives in a private repository.
+    </div>
+
+    <section class="panel">
+      <h2>00 · SYSTEM MATRIX</h2>
+      <table>
+        <thead><tr><th>Subsystem</th><th>Link</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Connection &amp; auth</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>HUD overlay</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td><b>In-game chat (F6)</b></td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Server console (F10)</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Admin panel (F7)</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Player menu</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>RedSync Launcher</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Matchmaker list</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Movement / puppets / PvP</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Animation / locomotion</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>PROJECT SMASHER</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>CERBERUS EVENT</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Self-heal + security</td><td class="bar">████████████</td><td class="ok">ONLINE</td></tr>
+          <tr><td>Proximity voice</td><td class="bar partial">████████░░░░</td><td class="partial">ONLINE</td></tr>
+          <tr><td>Vehicles</td><td class="bar improved">██████████░░</td><td><div class="status-stack improved"><span class="label">IMPROVED</span><span class="row-note">Driver stand-in buried while car pose syncs</span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>01 · CONTROL DECK</h2>
+      <table>
+        <tbody>
+          <tr><td><b>`</b></td><td>Player menu</td></tr>
+          <tr><td><b>F6</b></td><td>Chat (live)</td></tr>
+          <tr><td><b>F10</b></td><td>Console</td></tr>
+          <tr><td><b>F11</b></td><td>Stop/resume world</td></tr>
+          <tr><td><b>.</b></td><td>Toggle proximity voice</td></tr>
+          <tr><td><b>F7</b></td><td>Admin panel</td></tr>
+          <tr><td>projectsmasher</td><td>PROJECT SMASHER (admin)</td></tr>
+          <tr><td>cerberusevent</td><td>CERBERUS EVENT (admin)</td></tr>
+          <tr><td>endevent</td><td>Clear active event</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>02 · COMBAT EVENTS</h2>
+      <p><b class="ok">PROJECT SMASHER</b> — co-op Adam Smasher wave at the commanding player.</p>
+      <p><b class="ok">CERBERUS EVENT</b> — city-wide Cerberus hunt (Phantom Liberty). One event at a time. Shared server HP.</p>
+    </section>
+
+    <section class="panel">
+      <h2>03 · WHAT THIS FACE CONTAINS</h2>
+      <p>Branding, status, high-level controls, event overview, credits.</p>
+      <p>Not included: source, binaries, configs, server addresses, credentials, deploy docs.</p>
+    </section>
+
+    <footer>
+      MIT · © 2023–2026 XEROX710 · REDSYNC · STAY FROSTY, CHOOM
+    </footer>
+  </main>
+</body>
+</html>
