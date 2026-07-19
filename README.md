@@ -25,7 +25,9 @@
 <p align="center">
   <b>Client plugin · Redscript layer · .NET game server · C++ networking core</b><br/>
   Jack in with <code>RedSyncLauncher.exe</code> ·
-  <a href="https://xbuniverse.duckdns.org/api/media/RedSync-Tester-Client.zip">Download package</a> ·
+  <a href="https://xbuniverse.duckdns.org/api/media/RedSyncLauncher.zip">Official</a> ·
+  <a href="https://xbuniverse.duckdns.org/api/media/RedSyncLauncher-BETA.zip">BETA</a> ·
+  <a href="https://xbuniverse.duckdns.org/rs">/rs</a> ·
   <a href="#04-quick-start">Quick start</a>
 </p>
 
@@ -35,6 +37,21 @@
 > [!IMPORTANT]
 > **This repository is the public showcase face.** It mirrors the private RedSync README.  
 > **No source code, binaries, configs, or credentials are published here.** Implementation lives in the private repository.
+
+## Channels (Official vs BETA)
+
+| Channel | CDN zip | Game port | Remotes | Notes |
+| --- | --- | --- | --- | --- |
+| **Official** | [RedSyncLauncher.zip](https://xbuniverse.duckdns.org/api/media/RedSyncLauncher.zip) | **:2077** | Jackie male / Panam female | Stable play path |
+| **BETA** | [RedSyncLauncher-BETA.zip](https://xbuniverse.duckdns.org/api/media/RedSyncLauncher-BETA.zip) | **:2177** | Experimental cutscene V | Build `1.0.8-beta-vsafe` — soft-slide walk OK; crash-free first |
+
+**BETA-first:** every new client/server build ships to BETA and is human-verified before any Official promote.
+
+Download page: [https://xbuniverse.duckdns.org/rs](https://xbuniverse.duckdns.org/rs) · alias `/redsync`.
+
+Nametags use **yellow CPO** + ink name. Proximity voice: press **.** (~45m). Install / Repair clears **`.modded` cache only** — never wipe vanilla `final.redscripts`.
+
+---
 
 ## `00` SYSTEM MATRIX
 
@@ -55,7 +72,7 @@
 | Join / leave | `████████████` | **ONLINE** — puppets spawn & despawn with players |
 | Movement sync | `████████████` | **ONLINE** — ~10 Hz position stream |
 | Animation / locomotion | `████████████` | **ONLINE** — remote puppets play walk / run |
-| Player puppets | `████████████` | **ONLINE** — Jackie/Judy stand-ins + nametags |
+| Player puppets | `████████████` | **ONLINE** — Official Jackie/Panam; BETA cutscene V (experimental) + yellow CPO nametags |
 | Weapons / PvP | `████████████` | **ONLINE** — equip, shot relay, server hitscan damage |
 | **PROJECT SMASHER** | `████████████` | **ONLINE** — admin co-op Adam Smasher wave |
 | **CERBERUS EVENT** | `████████████` | **ONLINE** — city-wide Cerberus hunt (Phantom Liberty) |
@@ -136,13 +153,14 @@ After script updates, clear `r6/cache` so redscript recompiles.
 
 ## `04` QUICK START
 
-1. Download the slim launcher package:
-   - CDN: [RedSyncLauncher.zip](https://xbuniverse.duckdns.org/api/media/RedSyncLauncher.zip)
-   - Page: [RedSync.html](https://xbuniverse.duckdns.org/api/media/RedSync.html) (Blackwall download)
-2. Unzip and run **`RedSyncLauncher.exe`** (no Python required).
-3. First run offers **Install / Repair** (RED4ext, redscript, Codeware, RedSync + voice).
-4. Enter a callsign, select the **USA** official relay (`88.214.59.166:2077`), click **JACK IN**.
-5. Load into Night City — HUD shows ping + online players.
+1. Download a launcher package (or open the page):
+   - **Official (stable):** [RedSyncLauncher.zip](https://xbuniverse.duckdns.org/api/media/RedSyncLauncher.zip) → relay **:2077**
+   - **BETA (experimental cutscene V):** [RedSyncLauncher-BETA.zip](https://xbuniverse.duckdns.org/api/media/RedSyncLauncher-BETA.zip) → relay **:2177** · build `1.0.8-beta-vsafe`
+   - Page: [https://xbuniverse.duckdns.org/rs](https://xbuniverse.duckdns.org/rs) · alias `/redsync` · legacy [RedSync.html](https://xbuniverse.duckdns.org/api/media/RedSync.html)
+2. Unzip and run **`RedSyncLauncher.exe`** (no Python required). Confirm `CHANNEL-OFFICIAL.txt` or `CHANNEL-BETA.txt` in the zip.
+3. First run offers **Install / Repair** (RED4ext, redscript, Codeware, RedSync + voice). Clears **`.modded` cache only** — never delete `final.redscripts`.
+4. Enter a callsign, pick **USA Official (:2077)** or **USA BETA (:2177)** in the launcher, click **JACK IN**.
+5. Load into Night City — HUD shows ping + online players. Yellow CPO nametags mark remotes.
 
 After script updates: **Install / Repair** in the launcher (or `Install-All.bat`).
 
@@ -152,7 +170,7 @@ Launcher docs ship inside the download package (`START-HERE.txt` · `RedSyncLaun
 --redsync-server-address=<ip> --redsync-server-port=2077 --launcher-skip
 ```
 
-Use `127.0.0.1` only on the machine running the server. Remote clients need LAN IP or public/VPS address.
+Use port **2177** for BETA. Use `127.0.0.1` only on the machine running the server. Remote clients need LAN IP or public/VPS address.
 
 Do **not** copy `game-path.cfg`, `launch-args.cfg`, or `server-address.cfg` between PCs — they are created locally.
 
